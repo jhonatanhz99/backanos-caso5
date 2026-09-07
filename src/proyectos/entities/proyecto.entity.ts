@@ -11,6 +11,9 @@ export class Proyecto {
   @Column()
   descripcion: string;
 
+  @Column({ name: 'fecha_inicio', type: 'date', nullable: true })
+  fechaInicio: Date;
+
   @Column({ name: 'departamento_id' })
   departamentoId: number;
 }
