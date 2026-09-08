@@ -7,4 +7,8 @@ export class Department {
 
   @Column()
   name!: string;
+  id: number;
+
+  @Column()
+  name: string;
 }
