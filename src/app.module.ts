@@ -1,35 +1,33 @@
 import { Module } from '@nestjs/common';
-<<<<<<< HEAD
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-
-@Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
-})
-export class AppModule {}
-=======
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { Project } from './entities/project.entity';
-import { Department } from './entities/department.entity';
-
-import { ProjectsModule } from './modules/projects/projects.module';
-import { DepartmentsModule } from './modules/departments/departments.module';
+import { DepartmentsModule } from './departments/departments.module';
+import { EmployeesModule } from './employees/employees.module';
+import { ProyectosModule } from './proyectos/proyectos.module';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'database.sqlite',
-      entities: [Project, Department],
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
-
-    ProjectsModule,
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'mysql',
+        host: configService.get<string>('DB_HOST'),
+        port: configService.get<number>('DB_PORT'),
+        username: configService.get<string>('DB_USER'),
+        password: configService.get<string>('DB_PASSWORD'),
+        database: configService.get<string>('DB_NAME'),
+        autoLoadEntities: true,
+        synchronize: configService.get<boolean>('DB_SYNCHRONIZE'),
+      }),
+    }),
     DepartmentsModule,
+    EmployeesModule,
+    ProyectosModule,
+    TasksModule,
   ],
 })
 export class AppModule {}
->>>>>>> d1a6f28 (Proyecto API Punto 4 - Norman Junior Bravo)

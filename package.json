@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "caso-5",
   "version": "0.0.1",
   "description": "",
@@ -22,10 +21,15 @@
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.4",
     "@nestjs/core": "^11.0.1",
+    "@nestjs/mapped-types": "^12.0.0",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/typeorm": "^11.0.3",
+    "mysql2": "^3.24.3",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "typeorm": "^0.3.31"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -68,30 +72,5 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-=======
-  "scripts": {
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "build": "nest build"
-  },
-  "dependencies": {
-    "@nestjs/common": "^12.0.1",
-    "@nestjs/core": "^12.0.1",
-    "@nestjs/mapped-types": "^12.0.0",
-    "@nestjs/platform-express": "^12.0.1",
-    "@nestjs/typeorm": "^12.0.1",
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.15.1",
-    "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.2",
-    "sqlite3": "^6.0.1",
-    "typeorm": "^0.3.28"
-  },
-  "devDependencies": {
-    "@nestjs/cli": "^12.0.0",
-    "@types/node": "^26.4.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^6.0.3"
->>>>>>> d1a6f28 (Proyecto API Punto 4 - Norman Junior Bravo)
   }
 }
