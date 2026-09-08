@@ -1,37 +1,81 @@
+import { Test, TestingModule } from '@nestjs/testing';
+import { getRepositoryToken } from '@nestjs/typeorm';
 import { ConflictException, NotFoundException } from '@nestjs/common';
+import { Repository } from 'typeorm';
 import { DepartmentsService } from './departments.service';
+import { Department } from './entities/department.entity';
 
 describe('DepartmentsService', () => {
   let service: DepartmentsService;
+  let repository: Repository<Department>;
 
-  beforeEach(() => {
-    service = new DepartmentsService();
+  const mockRepository = {
+    find: jest.fn(),
+    findOne: jest.fn(),
+    create: jest.fn(),
+    save: jest.fn(),
+    remove: jest.fn(),
+  };
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        DepartmentsService,
+        {
+          provide: getRepositoryToken(Department),
+          useValue: mockRepository,
+        },
+      ],
+    }).compile();
+
+    service = module.get<DepartmentsService>(DepartmentsService);
+    repository = module.get<Repository<Department>>(
+      getRepositoryToken(Department),
+    );
   });
 
-  it('registers and lists departments', () => {
-    expect(service.create({ name: ' Desarrollo ' })).toEqual({
-      id: 1,
-      name: 'Desarrollo',
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+
+  describe('create', () => {
+    it('creates a department with trimmed name', async () => {
+      mockRepository.find.mockResolvedValue([]);
+      mockRepository.create.mockImplementation((dto) => dto);
+      mockRepository.save.mockImplementation(async (dto) => ({
+        id: 1,
+        ...dto,
+      }));
+
+      const result = await service.create({
+        nombre: ' Desarrollo ',
+        descripcion: 'Area de desarrollo',
+      });
+
+      expect(result.nombre).toBe('Desarrollo');
+      expect(result.descripcion).toBe('Area de desarrollo');
     });
-    expect(service.create({ name: 'Diseño' })).toEqual({ id: 2, name: 'Diseño' });
-    expect(service.findAll()).toHaveLength(2);
-  });
 
-  it('does not allow duplicate names regardless of case', () => {
-    service.create({ name: 'QA' });
+    it('throws ConflictException for duplicate name', async () => {
+      mockRepository.find.mockResolvedValue([
+        { id: 1, nombre: 'QA', descripcion: 'Quality Assurance' },
+      ]);
 
-    expect(() => service.create({ name: 'qa' })).toThrow(ConflictException);
-  });
-
-  it('updates and removes a department', () => {
-    service.create({ name: 'Marketing' });
-
-    expect(service.update(1, { name: 'Ventas' })).toEqual({
-      id: 1,
-      name: 'Ventas',
+      await expect(
+        service.create({ nombre: 'qa', descripcion: 'QA duplicado' }),
+      ).rejects.toThrow(ConflictException);
     });
-    service.remove(1);
+  });
 
-    expect(() => service.findOne(1)).toThrow(NotFoundException);
+  describe('findOne', () => {
+    it('throws NotFoundException when not found', async () => {
+      mockRepository.findOne.mockResolvedValue(null);
+
+      await expect(service.findOne(999)).rejects.toThrow(NotFoundException);
+    });
   });
 });

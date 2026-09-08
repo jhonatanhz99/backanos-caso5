@@ -1,0 +1,318 @@
+{
+  "info": {
+    "name": "TaskFlow Enterprise - Pruebas",
+    "description": "Pruebas CRUD para Departamentos, Empleados y Proyectos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Departamentos",
+      "item": [
+        {
+          "name": "Crear Departamento - Desarrollo",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Desarrollo\",\n  \"descripcion\": \"Area de desarrollo de software\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/departments", "host": ["{{baseUrl}}"], "path": ["departments"] }
+          }
+        },
+        {
+          "name": "Crear Departamento - Diseño",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Diseño\",\n  \"descripcion\": \"Area de diseño grafico y UX\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/departments", "host": ["{{baseUrl}}"], "path": ["departments"] }
+          }
+        },
+        {
+          "name": "Crear Departamento - QA",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"QA\",\n  \"descripcion\": \"Area de aseguramiento de calidad\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/departments", "host": ["{{baseUrl}}"], "path": ["departments"] }
+          }
+        },
+        {
+          "name": "Crear Departamento - Marketing",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Marketing\",\n  \"descripcion\": \"Area de marketing digital\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/departments", "host": ["{{baseUrl}}"], "path": ["departments"] }
+          }
+        },
+        {
+          "name": "Crear Departamento - Duplicado (debe fallar)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"desarrollo\",\n  \"descripcion\": \"Duplicado\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/departments", "host": ["{{baseUrl}}"], "path": ["departments"] }
+          }
+        },
+        {
+          "name": "Listar Todos los Departamentos",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/departments", "host": ["{{baseUrl}}"], "path": ["departments"] }
+          }
+        },
+        {
+          "name": "Obtener Departamento por ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/departments/1", "host": ["{{baseUrl}}"], "path": ["departments", "1"] }
+          }
+        },
+        {
+          "name": "Obtener Departamento Inexistente (debe fallar)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/departments/999", "host": ["{{baseUrl}}"], "path": ["departments", "999"] }
+          }
+        },
+        {
+          "name": "Actualizar Departamento",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Desarrollo Software\",\n  \"descripcion\": \"Area de desarrollo actualizada\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/departments/1", "host": ["{{baseUrl}}"], "path": ["departments", "1"] }
+          }
+        },
+        {
+          "name": "Eliminar Departamento",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/departments/4", "host": ["{{baseUrl}}"], "path": ["departments", "4"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Empleados",
+      "item": [
+        {
+          "name": "Crear Empleado - Juan",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"correo\": \"juan@taskflow.com\",\n  \"cargo\": \"Desarrollador Senior\",\n  \"departamentoId\": 1\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/employees", "host": ["{{baseUrl}}"], "path": ["employees"] }
+          }
+        },
+        {
+          "name": "Crear Empleado - Maria",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Maria Garcia\",\n  \"correo\": \"maria@taskflow.com\",\n  \"cargo\": \"Disenadora UX\",\n  \"departamentoId\": 2\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/employees", "host": ["{{baseUrl}}"], "path": ["employees"] }
+          }
+        },
+        {
+          "name": "Crear Empleado - Carlos",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Carlos Lopez\",\n  \"correo\": \"carlos@taskflow.com\",\n  \"cargo\": \"QA Tester\",\n  \"departamentoId\": 3\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/employees", "host": ["{{baseUrl}}"], "path": ["employees"] }
+          }
+        },
+        {
+          "name": "Crear Empleado - Departamento Inexistente (debe fallar)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Test\",\n  \"correo\": \"test@taskflow.com\",\n  \"cargo\": \"Tester\",\n  \"departamentoId\": 999\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/employees", "host": ["{{baseUrl}}"], "path": ["employees"] }
+          }
+        },
+        {
+          "name": "Crear Empleado - Correo Duplicado (debe fallar)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Juan Duplicado\",\n  \"correo\": \"juan@taskflow.com\",\n  \"cargo\": \"Otro\",\n  \"departamentoId\": 1\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/employees", "host": ["{{baseUrl}}"], "path": ["employees"] }
+          }
+        },
+        {
+          "name": "Listar Todos los Empleados",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/employees", "host": ["{{baseUrl}}"], "path": ["employees"] }
+          }
+        },
+        {
+          "name": "Obtener Empleado por ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/employees/1", "host": ["{{baseUrl}}"], "path": ["employees", "1"] }
+          }
+        },
+        {
+          "name": "Obtener Empleado Inexistente (debe fallar)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/employees/999", "host": ["{{baseUrl}}"], "path": ["employees", "999"] }
+          }
+        },
+        {
+          "name": "Actualizar Empleado",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cargo\": \"Tech Lead\",\n  \"departamentoId\": 1\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/employees/1", "host": ["{{baseUrl}}"], "path": ["employees", "1"] }
+          }
+        },
+        {
+          "name": "Eliminar Empleado",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/employees/3", "host": ["{{baseUrl}}"], "path": ["employees", "3"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Proyectos",
+      "item": [
+        {
+          "name": "Crear Proyecto - TaskFlow App",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"TaskFlow App\",\n  \"descripcion\": \"Desarrollo de la plataforma principal\",\n  \"fechaInicio\": \"2026-09-01\",\n  \"departamentoId\": 1\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/proyectos", "host": ["{{baseUrl}}"], "path": ["proyectos"] }
+          }
+        },
+        {
+          "name": "Crear Proyecto - Rediseño Web",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Rediseño Web\",\n  \"descripcion\": \"Rediseño del sitio corporativo\",\n  \"fechaInicio\": \"2026-09-15\",\n  \"departamentoId\": 2\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/proyectos", "host": ["{{baseUrl}}"], "path": ["proyectos"] }
+          }
+        },
+        {
+          "name": "Crear Proyecto - Sin FechaInicio",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Proyecto Sin Fecha\",\n  \"descripcion\": \"Proyecto opcional sin fecha\",\n  \"departamentoId\": 3\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/proyectos", "host": ["{{baseUrl}}"], "path": ["proyectos"] }
+          }
+        },
+        {
+          "name": "Crear Proyecto - Departamento Inexistente (debe fallar)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Proyecto Invalido\",\n  \"descripcion\": \"No existe el depto\",\n  \"departamentoId\": 999\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/proyectos", "host": ["{{baseUrl}}"], "path": ["proyectos"] }
+          }
+        },
+        {
+          "name": "Listar Todos los Proyectos",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/proyectos", "host": ["{{baseUrl}}"], "path": ["proyectos"] }
+          }
+        },
+        {
+          "name": "Obtener Proyecto por ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/proyectos/1", "host": ["{{baseUrl}}"], "path": ["proyectos", "1"] }
+          }
+        },
+        {
+          "name": "Obtener Proyecto Inexistente (debe fallar)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/proyectos/999", "host": ["{{baseUrl}}"], "path": ["proyectos", "999"] }
+          }
+        },
+        {
+          "name": "Actualizar Proyecto",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"TaskFlow App v2\",\n  \"descripcion\": \"Version 2 actualizada\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/proyectos/1", "host": ["{{baseUrl}}"], "path": ["proyectos", "1"] }
+          }
+        },
+        {
+          "name": "Eliminar Proyecto",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/proyectos/3", "host": ["{{baseUrl}}"], "path": ["proyectos", "3"] }
+          }
+        }
+      ]
+    }
+  ]
+}

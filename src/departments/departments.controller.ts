@@ -41,6 +41,6 @@ export class DepartmentsController {
 
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
-    this.departmentsService.remove(id);
+    return this.departmentsService.remove(id);
   }
 }
