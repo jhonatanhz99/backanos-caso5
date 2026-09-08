@@ -4,23 +4,27 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateDepartmentDto } from './dto/create-department.dto';
 import { UpdateDepartmentDto } from './dto/update-department.dto';
-import { Department } from './department.interface';
+import { Department } from './entities/department.entity';
 
 @Injectable()
 export class DepartmentsService {
-  private readonly departments: Department[] = [];
-  private nextId = 1;
+  constructor(
+    @InjectRepository(Department)
+    private readonly departmentRepository: Repository<Department>,
+  ) {}
 
-  findAll(): Department[] {
-    return this.departments;
+  findAll(): Promise<Department[]> {
+    return this.departmentRepository.find();
   }
 
-  findOne(id: number): Department {
-    const department = this.departments.find(
-      (currentDepartment) => currentDepartment.id === id,
-    );
+  async findOne(id: number): Promise<Department> {
+    const department = await this.departmentRepository.findOne({
+      where: { id },
+    });
 
     if (!department) {
       throw new NotFoundException(`Department with id ${id} not found`);
@@ -29,53 +33,62 @@ export class DepartmentsService {
     return department;
   }
 
-  create(createDepartmentDto: CreateDepartmentDto): Department {
-    const name = this.normalizeName(createDepartmentDto.name);
-    this.ensureNameIsAvailable(name);
+  async create(createDepartmentDto: CreateDepartmentDto): Promise<Department> {
+    const nombre = this.normalizeName(createDepartmentDto.nombre);
+    await this.ensureNameIsAvailable(nombre);
 
-    const department: Department = { id: this.nextId++, name };
-    this.departments.push(department);
-    return department;
+    const department = this.departmentRepository.create({
+      nombre,
+      descripcion: createDepartmentDto.descripcion,
+    });
+    return this.departmentRepository.save(department);
   }
 
-  update(id: number, updateDepartmentDto: UpdateDepartmentDto): Department {
-    const department = this.findOne(id);
-    const name = this.normalizeName(updateDepartmentDto.name);
-    this.ensureNameIsAvailable(name, id);
+  async update(
+    id: number,
+    updateDepartmentDto: UpdateDepartmentDto,
+  ): Promise<Department> {
+    const department = await this.findOne(id);
 
-    department.name = name;
-    return department;
-  }
-
-  remove(id: number): void {
-    const departmentIndex = this.departments.findIndex(
-      (currentDepartment) => currentDepartment.id === id,
-    );
-
-    if (departmentIndex === -1) {
-      throw new NotFoundException(`Department with id ${id} not found`);
+    if (updateDepartmentDto.nombre !== undefined) {
+      const nombre = this.normalizeName(updateDepartmentDto.nombre);
+      await this.ensureNameIsAvailable(nombre, id);
+      department.nombre = nombre;
     }
 
-    this.departments.splice(departmentIndex, 1);
+    if (updateDepartmentDto.descripcion !== undefined) {
+      department.descripcion = updateDepartmentDto.descripcion;
+    }
+
+    return this.departmentRepository.save(department);
+  }
+
+  async remove(id: number): Promise<void> {
+    const department = await this.findOne(id);
+    await this.departmentRepository.remove(department);
   }
 
   private normalizeName(name: string): string {
     if (typeof name !== 'string' || !name.trim()) {
-      throw new BadRequestException('Department name is required');
+      throw new BadRequestException('Department nombre is required');
     }
 
     return name.trim();
   }
 
-  private ensureNameIsAvailable(name: string, ignoredId?: number): void {
-    const alreadyExists = this.departments.some(
+  private async ensureNameIsAvailable(
+    nombre: string,
+    ignoredId?: number,
+  ): Promise<void> {
+    const departments = await this.departmentRepository.find();
+    const alreadyExists = departments.some(
       (department) =>
         department.id !== ignoredId &&
-        department.name.toLocaleLowerCase() === name.toLocaleLowerCase(),
+        department.nombre.toLocaleLowerCase() === nombre.toLocaleLowerCase(),
     );
 
     if (alreadyExists) {
-      throw new ConflictException(`Department "${name}" already exists`);
+      throw new ConflictException(`Department "${nombre}" already exists`);
     }
   }
 }
