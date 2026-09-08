@@ -18,11 +18,16 @@ export class ProyectosService {
   }
 
   findAll(): Promise<Proyecto[]> {
-    return this.proyectosRepository.find();
+    return this.proyectosRepository.find({
+      relations: ['tareas'],
+    });
   }
 
   async findOne(id: number): Promise<Proyecto> {
-    const proyecto = await this.proyectosRepository.findOneBy({ id });
+    const proyecto = await this.proyectosRepository.findOne({
+      where: { id },
+      relations: ['tareas'],
+    });
 
     if (!proyecto) {
       throw new NotFoundException(`Proyecto with id ${id} not found`);
