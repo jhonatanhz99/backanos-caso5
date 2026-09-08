@@ -1,3 +1,4 @@
 export class UpdateDepartmentDto {
-  name!: string;
+  nombre?: string;
+  descripcion?: string;
 }

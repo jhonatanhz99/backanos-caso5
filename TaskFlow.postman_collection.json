@@ -1,0 +1,144 @@
+{
+  "info": {
+    "name": "TaskFlow Enterprise - Pruebas",
+    "description": "Pruebas CRUD para Departamentos, Empleados y Proyectos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Departamentos",
+      "item": [
+        {
+          "name": "Crear Departamento",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Desarrollo\",\n  \"descripcion\": \"Area de desarrollo de software\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/departments", "host": ["{{baseUrl}}"], "path": ["departments"] }
+          }
+        },
+        {
+          "name": "Listar Todos los Departamentos",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/departments", "host": ["{{baseUrl}}"], "path": ["departments"] }
+          }
+        },
+        {
+          "name": "Actualizar Departamento",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Desarrollo Software\",\n  \"descripcion\": \"Area de desarrollo actualizada\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/departments/1", "host": ["{{baseUrl}}"], "path": ["departments", "1"] }
+          }
+        },
+        {
+          "name": "Eliminar Departamento",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/departments/1", "host": ["{{baseUrl}}"], "path": ["departments", "1"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Empleados",
+      "item": [
+        {
+          "name": "Crear Empleado",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"correo\": \"juan@taskflow.com\",\n  \"cargo\": \"Desarrollador Senior\",\n  \"departamentoId\": 1\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/employees", "host": ["{{baseUrl}}"], "path": ["employees"] }
+          }
+        },
+        {
+          "name": "Listar Todos los Empleados",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/employees", "host": ["{{baseUrl}}"], "path": ["employees"] }
+          }
+        },
+        {
+          "name": "Actualizar Empleado",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cargo\": \"Tech Lead\",\n  \"departamentoId\": 1\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/employees/1", "host": ["{{baseUrl}}"], "path": ["employees", "1"] }
+          }
+        },
+        {
+          "name": "Eliminar Empleado",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/employees/1", "host": ["{{baseUrl}}"], "path": ["employees", "1"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Proyectos",
+      "item": [
+        {
+          "name": "Crear Proyecto",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"TaskFlow App\",\n  \"descripcion\": \"Desarrollo de la plataforma principal\",\n  \"fechaInicio\": \"2026-09-01\",\n  \"departamentoId\": 1\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/proyectos", "host": ["{{baseUrl}}"], "path": ["proyectos"] }
+          }
+        },
+        {
+          "name": "Listar Todos los Proyectos",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/proyectos", "host": ["{{baseUrl}}"], "path": ["proyectos"] }
+          }
+        },
+        {
+          "name": "Actualizar Proyecto",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"TaskFlow App v2\",\n  \"descripcion\": \"Version 2 actualizada\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/proyectos/1", "host": ["{{baseUrl}}"], "path": ["proyectos", "1"] }
+          }
+        },
+        {
+          "name": "Eliminar Proyecto",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/proyectos/1", "host": ["{{baseUrl}}"], "path": ["proyectos", "1"] }
+          }
+        }
+      ]
+    }
+  ]
+}

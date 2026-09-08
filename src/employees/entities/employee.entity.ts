@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Department } from '../../departments/entities/department.entity';
 
 @Entity('employees')
 export class Employee {
@@ -8,7 +15,7 @@ export class Employee {
   @Column()
   nombre: string;
 
-  @Column()
+  @Column({ unique: true })
   correo: string;
 
   @Column()
@@ -16,4 +23,8 @@ export class Employee {
 
   @Column({ name: 'departamento_id' })
   departamentoId: number;
+
+  @ManyToOne(() => Department, (department) => department.empleados)
+  @JoinColumn({ name: 'departamento_id' })
+  departamento: Department;
 }
