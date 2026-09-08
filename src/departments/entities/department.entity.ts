@@ -6,8 +6,5 @@ export class Department {
   id!: number;
 
   @Column()
-  nombre!: string;
-
-  @Column()
-  descripcion!: string;
+  name!: string;
 }
