@@ -24,7 +24,7 @@ export class Employee {
   @Column({ name: 'departamento_id' })
   departamentoId: number;
 
-  @ManyToOne(() => Department)
+  @ManyToOne(() => Department, (department) => department.empleados)
   @JoinColumn({ name: 'departamento_id' })
   departamento: Department;
 }
