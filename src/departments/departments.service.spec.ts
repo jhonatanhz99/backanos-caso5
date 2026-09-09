@@ -1,13 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { ConflictException, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import { DepartmentsService } from './departments.service';
 import { Department } from './entities/department.entity';
+import { CreateDepartmentDto } from './dto/create-department.dto';
 
 describe('DepartmentsService', () => {
   let service: DepartmentsService;
-  let repository: Repository<Department>;
 
   const mockRepository = {
     find: jest.fn(),
@@ -29,9 +28,6 @@ describe('DepartmentsService', () => {
     }).compile();
 
     service = module.get<DepartmentsService>(DepartmentsService);
-    repository = module.get<Repository<Department>>(
-      getRepositoryToken(Department),
-    );
   });
 
   afterEach(() => {
@@ -45,8 +41,10 @@ describe('DepartmentsService', () => {
   describe('create', () => {
     it('creates a department with trimmed name', async () => {
       mockRepository.find.mockResolvedValue([]);
-      mockRepository.create.mockImplementation((dto) => dto);
-      mockRepository.save.mockImplementation(async (dto) => ({
+      mockRepository.create.mockImplementation(
+        (dto: CreateDepartmentDto) => dto,
+      );
+      mockRepository.save.mockImplementation((dto: CreateDepartmentDto) => ({
         id: 1,
         ...dto,
       }));
