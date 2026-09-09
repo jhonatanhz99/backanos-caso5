@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "TaskFlow Enterprise - Caso Practico 5",
-    "description": "Coleccion Postman del Caso Practico 5 (TaskFlow Enterprise). Cubre los CRUD de los 5 integrantes: Departamentos, Empleados, Proyectos, Tareas y Consultas Avanzadas.\n\nNota: la actualizacion se implementa con el metodo PATCH (los controllers usan @Patch).\n\nVariables para editar antes de usar:\n- baseUrl: URL del servidor (default http://localhost:3000)\n- departmentId / employeeId / proyectoId / taskId: ids de ejemplo; ajustalos con los que devuelva cada POST.",
+    "description": "Coleccion Postman del Caso Practico 5 (TaskFlow Enterprise). Cubre los CRUD de los 5 integrantes.\n\nDistribucion oficial:\n- Integrante 1 (Jonier): Configuracion inicial + Empleados\n- Integrante 2 (Yhan): Departamentos\n- Integrante 3 (Vanya): Proyectos\n- Integrante 4 (Norman): Tareas\n- Integrante 5 (Jhonatan): Consultas Avanzadas\n\nEl orden de las carpetas sigue la logica del flujo de datos (Departamentos -> Empleados -> Proyectos -> Tareas -> Consultas Avanzadas).\n\nNota: la actualizacion se implementa con el metodo PATCH (los controllers usan @Patch).\n\nVariables para editar antes de usar:\n- baseUrl: URL del servidor (default http://localhost:3000)\n- departmentId / employeeId / proyectoId / taskId: ids de ejemplo; ajustalos con los que devuelva cada POST.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -33,8 +33,8 @@
   ],
   "item": [
     {
-      "name": "1. Departamentos (Yhan)",
-      "description": "Integrante 1: Configuracion inicial + CRUD de Departamentos",
+      "name": "Departamentos (Integrante 2 - Yhan)",
+      "description": "Integrante 2 (Yhan): CRUD de Departamentos",
       "item": [
         {
           "name": "Crear Departamento - POST",
@@ -104,8 +104,8 @@
       ]
     },
     {
-      "name": "2. Empleados (Jonier)",
-      "description": "Integrante 2: CRUD de Empleados vinculados a un departamento",
+      "name": "Empleados (Integrante 1 - Jonier)",
+      "description": "Integrante 1 (Jonier): CRUD de Empleados vinculados a un departamento",
       "item": [
         {
           "name": "Crear Empleado - POST",
@@ -175,8 +175,8 @@
       ]
     },
     {
-      "name": "3. Proyectos (Vanya)",
-      "description": "Integrante 3: CRUD de Proyectos vinculados a un departamento",
+      "name": "Proyectos (Integrante 3 - Vanya)",
+      "description": "Integrante 3 (Vanya): CRUD de Proyectos vinculados a un departamento",
       "item": [
         {
           "name": "Crear Proyecto - POST",
@@ -246,8 +246,8 @@
       ]
     },
     {
-      "name": "4. Tareas (Norman)",
-      "description": "Integrante 4: CRUD de Tareas vinculadas a un proyecto y a un empleado. Estados: PENDIENTE, EN_PROGRESO, COMPLETADA",
+      "name": "Tareas (Integrante 4 - Norman)",
+      "description": "Integrante 4 (Norman): CRUD de Tareas vinculadas a un proyecto y a un empleado. Estados: PENDIENTE, EN_PROGRESO, COMPLETADA",
       "item": [
         {
           "name": "Crear Tarea - POST",
@@ -317,8 +317,8 @@
       ]
     },
     {
-      "name": "5. Consultas Avanzadas (Jhonatan)",
-      "description": "Integrante 5: Detalle de un proyecto con departamento, tareas, empleados asignados y porcentaje de avance calculado",
+      "name": "Consultas Avanzadas (Integrante 5 - Jhonatan)",
+      "description": "Integrante 5 (Jhonatan): Detalle de un proyecto con departamento, tareas, empleados asignados y porcentaje de avance calculado",
       "item": [
         {
           "name": "Detalle de Proyecto con Avance - GET",
