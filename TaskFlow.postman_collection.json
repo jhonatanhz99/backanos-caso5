@@ -1,21 +1,43 @@
 {
   "info": {
-    "name": "TaskFlow Enterprise - Pruebas",
-    "description": "Pruebas CRUD para Departamentos, Empleados y Proyectos",
+    "name": "TaskFlow Enterprise - Caso Practico 5",
+    "description": "Coleccion Postman del Caso Practico 5 (TaskFlow Enterprise). Cubre los CRUD de los 5 integrantes: Departamentos, Empleados, Proyectos, Tareas y Consultas Avanzadas.\n\nNota: la actualizacion se implementa con el metodo PATCH (los controllers usan @Patch).\n\nVariables para editar antes de usar:\n- baseUrl: URL del servidor (default http://localhost:3000)\n- departmentId / employeeId / proyectoId / taskId: ids de ejemplo; ajustalos con los que devuelva cada POST.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://localhost:3000"
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "departmentId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "employeeId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "proyectoId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "taskId",
+      "value": "1",
+      "type": "string"
     }
   ],
   "item": [
     {
-      "name": "Departamentos",
+      "name": "1. Departamentos (Yhan)",
+      "description": "Integrante 1: Configuracion inicial + CRUD de Departamentos",
       "item": [
         {
-          "name": "Crear Departamento",
+          "name": "Crear Departamento - POST",
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -23,61 +45,108 @@
               "mode": "raw",
               "raw": "{\n  \"nombre\": \"Desarrollo\",\n  \"descripcion\": \"Area de desarrollo de software\"\n}"
             },
-            "url": { "raw": "{{baseUrl}}/departments", "host": ["{{baseUrl}}"], "path": ["departments"] }
+            "url": {
+              "raw": "{{baseUrl}}/departments",
+              "host": ["{{baseUrl}}"],
+              "path": ["departments"]
+            }
           }
         },
         {
-          "name": "Listar Todos los Departamentos",
+          "name": "Listar Departamentos - GET",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{baseUrl}}/departments", "host": ["{{baseUrl}}"], "path": ["departments"] }
+            "url": {
+              "raw": "{{baseUrl}}/departments",
+              "host": ["{{baseUrl}}"],
+              "path": ["departments"]
+            }
           }
         },
         {
-          "name": "Actualizar Departamento",
+          "name": "Obtener Departamento por id - GET",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/departments/{{departmentId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["departments", "{{departmentId}}"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Departamento - PATCH",
           "request": {
             "method": "PATCH",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Desarrollo Software\",\n  \"descripcion\": \"Area de desarrollo actualizada\"\n}"
+              "raw": "{\n  \"nombre\": \"Desarrollo y Diseno\",\n  \"descripcion\": \"Area actualizada de desarrollo y diseno\"\n}"
             },
-            "url": { "raw": "{{baseUrl}}/departments/1", "host": ["{{baseUrl}}"], "path": ["departments", "1"] }
+            "url": {
+              "raw": "{{baseUrl}}/departments/{{departmentId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["departments", "{{departmentId}}"]
+            }
           }
         },
         {
-          "name": "Eliminar Departamento",
+          "name": "Eliminar Departamento - DELETE",
           "request": {
             "method": "DELETE",
-            "url": { "raw": "{{baseUrl}}/departments/1", "host": ["{{baseUrl}}"], "path": ["departments", "1"] }
+            "url": {
+              "raw": "{{baseUrl}}/departments/{{departmentId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["departments", "{{departmentId}}"]
+            }
           }
         }
       ]
     },
     {
-      "name": "Empleados",
+      "name": "2. Empleados (Jonier)",
+      "description": "Integrante 2: CRUD de Empleados vinculados a un departamento",
       "item": [
         {
-          "name": "Crear Empleado",
+          "name": "Crear Empleado - POST",
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"correo\": \"juan@taskflow.com\",\n  \"cargo\": \"Desarrollador Senior\",\n  \"departamentoId\": 1\n}"
+              "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"correo\": \"juan.perez@taskflow.com\",\n  \"cargo\": \"Desarrollador Senior\",\n  \"departamentoId\": 1\n}"
             },
-            "url": { "raw": "{{baseUrl}}/employees", "host": ["{{baseUrl}}"], "path": ["employees"] }
+            "url": {
+              "raw": "{{baseUrl}}/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["employees"]
+            }
           }
         },
         {
-          "name": "Listar Todos los Empleados",
+          "name": "Listar Empleados - GET",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{baseUrl}}/employees", "host": ["{{baseUrl}}"], "path": ["employees"] }
+            "url": {
+              "raw": "{{baseUrl}}/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["employees"]
+            }
           }
         },
         {
-          "name": "Actualizar Empleado",
+          "name": "Obtener Empleado por id - GET",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/employees/{{employeeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["employees", "{{employeeId}}"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Empleado - PATCH",
           "request": {
             "method": "PATCH",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -85,23 +154,32 @@
               "mode": "raw",
               "raw": "{\n  \"cargo\": \"Tech Lead\",\n  \"departamentoId\": 1\n}"
             },
-            "url": { "raw": "{{baseUrl}}/employees/1", "host": ["{{baseUrl}}"], "path": ["employees", "1"] }
+            "url": {
+              "raw": "{{baseUrl}}/employees/{{employeeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["employees", "{{employeeId}}"]
+            }
           }
         },
         {
-          "name": "Eliminar Empleado",
+          "name": "Eliminar Empleado - DELETE",
           "request": {
             "method": "DELETE",
-            "url": { "raw": "{{baseUrl}}/employees/1", "host": ["{{baseUrl}}"], "path": ["employees", "1"] }
+            "url": {
+              "raw": "{{baseUrl}}/employees/{{employeeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["employees", "{{employeeId}}"]
+            }
           }
         }
       ]
     },
     {
-      "name": "Proyectos",
+      "name": "3. Proyectos (Vanya)",
+      "description": "Integrante 3: CRUD de Proyectos vinculados a un departamento",
       "item": [
         {
-          "name": "Crear Proyecto",
+          "name": "Crear Proyecto - POST",
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -109,33 +187,148 @@
               "mode": "raw",
               "raw": "{\n  \"nombre\": \"TaskFlow App\",\n  \"descripcion\": \"Desarrollo de la plataforma principal\",\n  \"fechaInicio\": \"2026-09-01\",\n  \"departamentoId\": 1\n}"
             },
-            "url": { "raw": "{{baseUrl}}/proyectos", "host": ["{{baseUrl}}"], "path": ["proyectos"] }
+            "url": {
+              "raw": "{{baseUrl}}/proyectos",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos"]
+            }
           }
         },
         {
-          "name": "Listar Todos los Proyectos",
+          "name": "Listar Proyectos - GET",
           "request": {
             "method": "GET",
-            "url": { "raw": "{{baseUrl}}/proyectos", "host": ["{{baseUrl}}"], "path": ["proyectos"] }
+            "url": {
+              "raw": "{{baseUrl}}/proyectos",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos"]
+            }
           }
         },
         {
-          "name": "Actualizar Proyecto",
+          "name": "Obtener Proyecto por id - GET",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/{{proyectoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", "{{proyectoId}}"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Proyecto - PATCH",
           "request": {
             "method": "PATCH",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nombre\": \"TaskFlow App v2\",\n  \"descripcion\": \"Version 2 actualizada\"\n}"
+              "raw": "{\n  \"nombre\": \"TaskFlow App v2\",\n  \"descripcion\": \"Version 2 actualizada\",\n  \"fechaInicio\": \"2026-10-01\"\n}"
             },
-            "url": { "raw": "{{baseUrl}}/proyectos/1", "host": ["{{baseUrl}}"], "path": ["proyectos", "1"] }
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/{{proyectoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", "{{proyectoId}}"]
+            }
           }
         },
         {
-          "name": "Eliminar Proyecto",
+          "name": "Eliminar Proyecto - DELETE",
           "request": {
             "method": "DELETE",
-            "url": { "raw": "{{baseUrl}}/proyectos/1", "host": ["{{baseUrl}}"], "path": ["proyectos", "1"] }
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/{{proyectoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", "{{proyectoId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Tareas (Norman)",
+      "description": "Integrante 4: CRUD de Tareas vinculadas a un proyecto y a un empleado. Estados: PENDIENTE, EN_PROGRESO, COMPLETADA",
+      "item": [
+        {
+          "name": "Crear Tarea - POST",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Crear endpoint de login\",\n  \"descripcion\": \"Autenticacion de usuarios con JWT\",\n  \"estado\": \"PENDIENTE\",\n  \"proyectoId\": 1,\n  \"empleadoId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks"]
+            }
+          }
+        },
+        {
+          "name": "Listar Tareas - GET",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks"]
+            }
+          }
+        },
+        {
+          "name": "Obtener Tarea por id - GET",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/tasks/{{taskId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks", "{{taskId}}"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Tarea - PATCH",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"COMPLETADA\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tasks/{{taskId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks", "{{taskId}}"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Tarea - DELETE",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/tasks/{{taskId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["tasks", "{{taskId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Consultas Avanzadas (Jhonatan)",
+      "description": "Integrante 5: Detalle de un proyecto con departamento, tareas, empleados asignados y porcentaje de avance calculado",
+      "item": [
+        {
+          "name": "Detalle de Proyecto con Avance - GET",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/{{proyectoId}}/detalle-avance",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", "{{proyectoId}}", "detalle-avance"]
+            }
           }
         }
       ]
