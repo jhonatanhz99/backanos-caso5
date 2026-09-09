@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Department } from '../../departments/entities/department.entity';
-import { Task, TaskStatus } from './task.entity';
+import { Task, TaskStatus } from '../../tasks/entities/task.entity';
 
 @Entity('proyectos')
 export class Proyecto {

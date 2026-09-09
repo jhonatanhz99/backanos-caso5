@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # compiled output
 /dist
 /node_modules
@@ -55,7 +54,7 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-=======
-node_modules/
-dist/
->>>>>>> d1a6f28 (Proyecto API Punto 4 - Norman Junior Bravo)
+
+# Base de datos local / artefactos de compilacion
+*.sqlite
+*.tsbuildinfo

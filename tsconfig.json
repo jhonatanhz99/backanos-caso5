@@ -12,10 +12,11 @@
     "sourceMap": true,
     "outDir": "./dist",
     "incremental": true,
+    "isolatedModules": true,
     "skipLibCheck": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "types": ["node"]
+    "types": ["node", "jest"]
   },
   "include": [
     "src/**/*.ts"
